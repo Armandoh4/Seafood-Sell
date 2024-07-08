@@ -1,0 +1,50 @@
+{% load static %}
+<div class="navbar_main_section sticky-top">
+    <div class="container-fluid manage_container">
+      <nav class="navbar navbar-expand-lg p-0">
+        <div class="container-fluid p-0">
+          <a class="navbar-brand navbar_brand text-white" href="/" style='font-size:50px;'>Seafood-Sell</a>
+          <button class="navbar-toggler navbar_toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="bi bi-list nav_list_icon"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="search_div" id="searchbar1">
+              <input class="nav_search" type="text" id="search"  placeholder="Type to search..." />
+              <a>
+                <img src="{% static 'assets/images/search.svg' %}"
+                class=" search_icon" alt="" />
+              </a>
+            </div>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar_ul justify-content-end">
+               <li class="nav-item nav_item_navbar">
+             
+                <div class="search_div" id='searchbar2'>
+                  <input class="nav_search" type="text" id="searh"
+                    placeholder="Type to search..." />
+                  <a>
+                    <img src="{% static 'assets/images/search.svg' %} "
+                   class=" search_icon" alt="" />
+                    
+                  </a>
+                </div>
+                <li class="nav-item nav_item_navbar">
+                    <a class="nav-link nav_link_text" href="/#about"><i class="bi bi-cart4"></i> Cart</a>
+                  </li>
+                <li class="nav-item nav_item_navbar">
+                  <a class="nav-link nav_link_text" href="/aboutus"> About Us</a>
+                </li>
+                <li class="nav-item nav_item_navbar">
+                  <a class="nav-link nav_link_text" href="#" data-scroll="contact">Contact Us</a>
+                </li> 
+                <li class="nav-item nav_item_navbar d-flex text-white">
+                    <a class="nav-link nav_link_text p-0 m-0" href="{% url 'login' %}">Login</a><a class="nav-link nav_link_text p-0 m-0" href="#" >/</a>
+                    <a class="nav-link nav_link_text p-0 m-0" href="{% url 'signup' %}" >Sign Up</a>
+                  </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block body %}
+{% load static %}
+<!-- Header Start -->
+<form method="get" action="/product">
+
+  {% include "components/filter.html" %}
+
+
+  <!-- popup section  -->
+  <div class="container-fluid p-0">
+    <div class="section_two">
+      <h3>All your favourite Seafoods in one place</h3>
+    </div>
+  </div>
+  <!-- seafoods Products section  -->
+  <div class="container-fluid manage_container">
+    <div class="section_three_ski manage_width">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
+          <div class="color_changer_first">
+            <div class="shoping_card card_content" id="first_Card_hero_section">
+              <div class="details_first px-5 text-white">
+                <h1>Title</h1>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, odio velit molestiae delectus illo
+                  quibusdam mollitia optio assumenda ab, blanditiis tempore at dolorum fugiat asperiores aperiam cum ea,
+                  laudantium distinctio amet fuga molestias? Ipsam suscipit harum reprehenderit consequatur voluptatem
+                  optio quasi, accusamus neque porro, repellendus perferendis commodi illum in velit!
+                </p>
+              </div>
+              <img src="{% static 'assets/images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt=""
+                class="shoping_card_img" style="opacity:0;" />
+              <div class="shoping_button">
+                <a href="/product?main_category=Clothing">
+                  <button type="button" class="shoping_card_button" id="first_seafood_button">
+                    Add to Cart
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
+          <div class="color_changer_second">
+            <div class="shoping_card card_content" id="secound_image_hero">
+              <div class="details_second px-5 text-white">
+                <h1>Title</h1>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, odio velit molestiae delectus illo
+                  quibusdam mollitia optio assumenda ab, blanditiis tempore at dolorum fugiat asperiores aperiam cum ea,
+                  laudantium distinctio amet fuga molestias? Ipsam suscipit harum reprehenderit consequatur voluptatem
+                  optio quasi, accusamus neque porro, repellendus perferendis commodi illum in velit!
+                </p>
+              </div>
+              <img src="{% static 'assets/images/image 2.png' %}" alt="" class=" shoping_card_img" style="opacity:0;" />
+              <div class="shoping_button">
+                <a href="">
+                  <button type="button" class="shoping_card_button">
+                    <a href="/product?main_category=Equipment" style="color:black;text-decoration: none;">
+                      Add to cart<a> 
+
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
+          <div class="color_changer_third">
+
+            <div class="shoping_card" id="third_image_hero">
+              <h4 style="opacity: 0;">CHANEL</h4>
+              <div class="details_third px-5 text-white">
+                <h1>Title</h1>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, odio velit molestiae delectus illo
+                  quibusdam mollitia optio assumenda ab, blanditiis tempore at dolorum fugiat asperiores aperiam cum ea,
+                  laudantium distinctio amet fuga molestias? Ipsam suscipit harum reprehenderit consequatur voluptatem
+                  optio quasi, accusamus neque porro, repellendus perferendis commodi illum in velit!
+                </p>
+              </div>
+              <img src="{% static 'assets/images/image 3.png' %}" alt="" class="shoping_card_img"
+                style="opacity: 0;" />
+              <div class="shoping_button">
+                <a href="/product">
+                  <button type="button" class="shoping_card_button">
+                    Add to Cart
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
+
+
+
+
+{% endblock %}
+
