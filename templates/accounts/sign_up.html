@@ -3,19 +3,26 @@
 {% block body %}
 <div class='container'>
     <!-- Sign up form  -->
-   <form class='w-50 m-auto'>
-    <h1 class='text-white mt-5'>Registration form</h1>
+   <form class='w-50 m-auto' action="{% url 'sign_in' %}" method="post">
+     {% csrf_token %}
+     <h1 class='text-white mt-5'>Registration form</h1>
+     {% for message in messages %}
+   <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" style="width: 100%;height: 55px;">
+     {{ message }}
+     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div>
+   {% endfor %}
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label text-white">Email</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label text-white">Username</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
       </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label text-white">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
     </div>
    
     <div class="d-flex justify-content-end">

@@ -2,7 +2,6 @@
 {% block body %}
 {% load static %}
 <!-- Header Start -->
-<form method="get" action="/product">
 
   {% include "components/filter.html" %}
 
@@ -16,23 +15,27 @@
   <!-- seafoods Products section  -->
   <div class="container-fluid manage_container">
     <div class="section_three_ski manage_width">
+      {% comment %} {% for products in product %}
+      1
+        {% for i in products.productimg.all %}
+        <img src='{{i.image.url}}'>
+        {% endfor %}
+        {% endfor %} {% endcomment %}
       <div class="row">
+        {% for product in product %}
+        {% if product.productimg.all %}
         <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
-          <div class="color_changer_first">
+          <div class="color_changer_first" style="background-image:url({% with product.productimg.first as first_image %}{{ first_image.image.url }}{% endwith %});">
             <div class="shoping_card card_content" id="first_Card_hero_section">
               <div class="details_first px-5 text-white">
-                <h1>Title</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, odio velit molestiae delectus illo
-                  quibusdam mollitia optio assumenda ab, blanditiis tempore at dolorum fugiat asperiores aperiam cum ea,
-                  laudantium distinctio amet fuga molestias? Ipsam suscipit harum reprehenderit consequatur voluptatem
-                  optio quasi, accusamus neque porro, repellendus perferendis commodi illum in velit!
+                <h1>{{ product.product_name }}</h1>
+                <p id="description-{{ forloop.counter }}">
+                  {{ product.description }}
                 </p>
               </div>
-              <img src="{% static 'assets/images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt=""
-                class="shoping_card_img" style="opacity:0;" />
+              <img src="{% static 'assets/images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt="" class="shoping_card_img" style="opacity:0;" />
               <div class="shoping_button">
-                <a href="/product?main_category=Clothing">
+                <a href="/addtocart/{{product.id}}">
                   <button type="button" class="shoping_card_button" id="first_seafood_button">
                     Add to Cart
                   </button>
@@ -41,67 +44,41 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
-          <div class="color_changer_second">
-            <div class="shoping_card card_content" id="secound_image_hero">
-              <div class="details_second px-5 text-white">
-                <h1>Title</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, odio velit molestiae delectus illo
-                  quibusdam mollitia optio assumenda ab, blanditiis tempore at dolorum fugiat asperiores aperiam cum ea,
-                  laudantium distinctio amet fuga molestias? Ipsam suscipit harum reprehenderit consequatur voluptatem
-                  optio quasi, accusamus neque porro, repellendus perferendis commodi illum in velit!
-                </p>
-              </div>
-              <img src="{% static 'assets/images/image 2.png' %}" alt="" class=" shoping_card_img" style="opacity:0;" />
-              <div class="shoping_button">
-                <a href="">
-                  <button type="button" class="shoping_card_button">
-                    <a href="/product?main_category=Equipment" style="color:black;text-decoration: none;">
-                      Add to cart<a> 
+        {% endif %}
+      {% endfor %}
+      
+     
+      
 
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
-          <div class="color_changer_third">
 
-            <div class="shoping_card" id="third_image_hero">
-              <h4 style="opacity: 0;">CHANEL</h4>
-              <div class="details_third px-5 text-white">
-                <h1>Title</h1>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, odio velit molestiae delectus illo
-                  quibusdam mollitia optio assumenda ab, blanditiis tempore at dolorum fugiat asperiores aperiam cum ea,
-                  laudantium distinctio amet fuga molestias? Ipsam suscipit harum reprehenderit consequatur voluptatem
-                  optio quasi, accusamus neque porro, repellendus perferendis commodi illum in velit!
-                </p>
-              </div>
-              <img src="{% static 'assets/images/image 3.png' %}" alt="" class="shoping_card_img"
-                style="opacity: 0;" />
-              <div class="shoping_button">
-                <a href="/product">
-                  <button type="button" class="shoping_card_button">
-                    Add to Cart
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
       </div>
 
     </div>
 
   </div>
 
-</form>
 
 
+<script>
+  function truncateDescription(description, maxLength) {
+    if (description.length > maxLength) {
+      return description.slice(0, maxLength) + '...';
+    }
+    return description;
+  }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    {% for product in product %}
+      var descriptionElement = document.getElementById('description-{{ forloop.counter }}');
+      if (descriptionElement) {
+        var truncatedDescription = truncateDescription(descriptionElement.innerText, 389);
+        descriptionElement.innerText = truncatedDescription;
+      }
+    {% endfor %}
+  });
+</script>
 
 {% endblock %}
 

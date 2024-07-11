@@ -32,11 +32,17 @@ def sign_in(request):
             name = request.POST.get('name')
             email = request.POST.get('email')
             password = request.POST.get('password')
-            user = User.objects.create_user(username=name, email=email, password=password)
-            user.save()
-            print('----------')
-            # login(request, user)
-            return redirect("login")
+            if User.objects.filter(email=email).exists() or User.objects.filter(username=name).exists():
+                messages.error(request, 'Username or Email address already exists!')
+                return render(request,'accounts/sign_up.html')
+            else:
+                user = User.objects.create_user(username=name, email=email, password=password)
+                messages.success(request, 'Your account is successfully created')
+                user.save()
+                print('----------')
+                
+                # login(request, user)
+                return redirect("login")
     
     
 

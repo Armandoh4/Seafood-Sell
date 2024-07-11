@@ -1,33 +1,33 @@
 <div class="container-fluid manage_container">
-    <div class="section_one manage_width">
-      <div class="dropdown_main_section">
-        <div class="dropdown002">
-          <div class="dropbtn">
-            Categories<i class="bi bi-chevron-down dropArrow"></i>
-          </div>
-          <div class="dropdown_content002">
-            <div class="option_002Div">
-              <ul class="option01Ul">
-                <li>
-                  <a href="/product?main_category=Clothing">All Categories</a>
+  <div class="section_one manage_width">
+    <div class="dropdown_main_section">
+      <div class="dropdown002">
+        <div class="dropbtn">
+          Categories<i class="bi bi-chevron-down dropArrow"></i>
+        </div>
+        <div class="dropdown_content002">
+          <div class="option_002Div">
+            <ul class="option01Ul">
+              <li>
+                <a href="/">All Products</a>
 
-                </li>
-                <li>
-                  <a href="/product?main_category=Clothing">Fresh Seafood</a>
+              </li>
+              <form action="/" method="get">
 
-                </li>
+                {% for categorie in categorie %}
                 <li>
-                  <a href="/product?main_category=Clothing">Frozen Seafood</a>
-
+                  <a><input type="submit" name="categorie"
+                      style="background-color: transparent;border: none;outline: none;cursor: pointer;color: white;"
+                      readonly value="{{categorie}}"></a>
                 </li>
-                <li>
-                  <a href="/product?main_category=Clothing">Smoked & Cured Seafood</a>
+                {% endfor %}
+              </form>
 
-                </li>
-              </ul>
-            </div>
+
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

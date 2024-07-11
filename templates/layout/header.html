@@ -29,19 +29,30 @@
                     
                   </a>
                 </div>
-                <li class="nav-item nav_item_navbar">
-                    <a class="nav-link nav_link_text" href="/#about"><i class="bi bi-cart4"></i> Cart</a>
+                {% if user.is_authenticated %}
+                <li class="nav-item nav_item_navbar" style="position: relative;">
+                  <div class="px-2" style="border-radius: 20px;  position: absolute;color: black;background-color: white; height: 22px;right:-15px;">  </div>
+                  <a class="nav-link nav_link_text" ><i class="bi bi-cart4"></i> Cart</a>
                   </li>
+                  {% endif %}
                 <li class="nav-item nav_item_navbar">
                   <a class="nav-link nav_link_text" href="/aboutus"> About Us</a>
                 </li>
                 <li class="nav-item nav_item_navbar">
                   <a class="nav-link nav_link_text" href="#" data-scroll="contact">Contact Us</a>
                 </li> 
+                {% if user.is_authenticated %}
+                <li class="nav-item nav_item_navbar d-flex text-white">
+                  <a class="nav-link nav_link_text p-0 m-0" href="{% url 'logout' %}">Logout</a>
+                  
+                </li>
+                {% else %}
                 <li class="nav-item nav_item_navbar d-flex text-white">
                     <a class="nav-link nav_link_text p-0 m-0" href="{% url 'login' %}">Login</a><a class="nav-link nav_link_text p-0 m-0" href="#" >/</a>
                     <a class="nav-link nav_link_text p-0 m-0" href="{% url 'signup' %}" >Sign Up</a>
                   </li>
+
+                  {% endif %}
             </ul>
           </div>
         </div>
