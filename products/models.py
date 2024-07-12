@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Categorie(models.Model):
@@ -18,5 +19,12 @@ class Product(models.Model):
 class Product_images(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE,default=1,null=True,related_name="productimg")
     image = models.ImageField(upload_to="images", null=True,blank=True)
+    def __str__(self) -> str:
+        return self.product.product_name
+
+class Cart(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,default=1,null=True,related_name="products")
+    loged_user=models.ForeignKey(User,on_delete=models.CASCADE,default=1,null=True,related_name="User")
+
     def __str__(self) -> str:
         return self.product.product_name

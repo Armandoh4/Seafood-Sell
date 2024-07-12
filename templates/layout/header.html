@@ -31,8 +31,8 @@
                 </div>
                 {% if user.is_authenticated %}
                 <li class="nav-item nav_item_navbar" style="position: relative;">
-                  <div class="px-2" style="border-radius: 20px;  position: absolute;color: black;background-color: white; height: 22px;right:-15px;">  </div>
-                  <a class="nav-link nav_link_text" ><i class="bi bi-cart4"></i> Cart</a>
+                  <div class="px-2" style="border-radius: 20px;  position: absolute;color: black;background-color: white; height: 22px;right:-15px;"> {{len_of_cart}} </div>
+                  <a class="nav-link nav_link_text" href="{% url 'cart' %}"><i class="bi bi-cart4"></i> Cart</a>
                   </li>
                   {% endif %}
                 <li class="nav-item nav_item_navbar">

@@ -8,6 +8,9 @@ print('hello')
 urlpatterns = [
     path('', views.index,name='home_page'),
     path('aboutus', views.aboutus,name='aboutus'),
+    path('cart', views.cart,name='cart'),
+    path('addtocart/<int:id>',views.addtocart,name="addtocart"),
+    path('remove/<int:id>',views.removefromcart,name="remove")
 
 ]
 
