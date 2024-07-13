@@ -10,7 +10,13 @@ urlpatterns = [
     path('aboutus', views.aboutus,name='aboutus'),
     path('cart', views.cart,name='cart'),
     path('addtocart/<int:id>',views.addtocart,name="addtocart"),
-    path('remove/<int:id>',views.removefromcart,name="remove")
+    path('remove/<int:id>',views.removefromcart,name="remove"),
+    path('checkout', views.checkout,name='checkout'),
+    path('create-checkout-session/', views.checkoutpro, name='create-checkout-session'),
+    path('stripe-webhook/', views.stripe_webhook, name='stripe-webhook'),
+    path('success', views.success,name='success'),
+    path('cancel', views.cancel,name='cancel'),
+
 
 ]
 

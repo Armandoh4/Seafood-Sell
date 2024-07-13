@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Buy cool new product</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <section>
+         
+        <button id="checkout-button">Checkout</button>
+    </section>
+    <script type="text/javascript">
+        var stripe = Stripe('{{ stripe_public_key }}');  // Pass your Stripe public key from the context
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function () {
+            console.log('click')
+            fetch('/create-checkout-session/', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Ensure CSRF token is passed
+                },
+                
+            })
+            .then(function (response) {
+                console.log(response)
+                return response.json();
+            })
+            .then(function (sessionId) {
+                console.log('...............................',sessionId)
+                return stripe.redirectToCheckout({ sessionId: sessionId.id });
+            })
+            .then(function (result) {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function (error) {
+                console.log('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
