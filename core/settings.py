@@ -140,3 +140,7 @@ MESSAGE_TAGS = {
 STRIPE_SECRET_KEY = 'sk_test_51Pb0sY2NRemYQKSHCGNy5wZoYXRzoaqI1sj7USDAwxx0VnFDBd14GooxFJDtvkGIu8bJkAPLHI9W8jrMrdWmpGFn00rVBWp4op'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51Pb0sY2NRemYQKSHemtVBAjeAzhe4Mpu4N2LV1AOEC6GNc2mn8vsJqbTZHghkr0fePOF82W4Flpstuhwef0N8AWh00lk8sTsYF'
 WEBHOOK_SECRET_KEY = 'whsec_fde6704921f13cb34d5b088455a8720f27bdf44458f5c034902ba3c3139f2de5'
+
+# Configure Django App for Heroku.
+import django_on_heroku
+django_on_heroku.settings(locals())
