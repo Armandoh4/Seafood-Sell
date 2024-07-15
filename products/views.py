@@ -152,3 +152,7 @@ def success(request):
         return render(request,'success.html')
 def cancel(request):
     return render(request,'cancel.html')
+def detail(request,id):
+    product = Product.objects.get(pk = id)
+    len_of_cart = Cart.objects.filter(loged_user=request.user).count()
+    return render(request,'details.html',{'product': product, 'len_of_cart': len_of_cart})

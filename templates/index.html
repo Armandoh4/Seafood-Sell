@@ -25,23 +25,26 @@
         {% for product in product %}
         {% if product.productimg.all %}
         <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
+
           <div class="color_changer_first" style="background-image:url({% with product.productimg.first as first_image %}{{ first_image.image.url }}{% endwith %});">
-            <div class="shoping_card card_content" id="first_Card_hero_section">
-              <div class="details_first px-5 text-white">
-                <h1>{{ product.product_name }}</h1>
-                <p id="description-{{ forloop.counter }}">
-                  {{ product.description }}
-                </p>
+            <a href="detail/{{product.id}}">
+              <div class="shoping_card card_content" id="first_Card_hero_section">
+                <div class="details_first px-5 text-white">
+                  <h1>{{ product.product_name }}</h1>
+                  <p id="description-{{ forloop.counter }}">
+                    {{ product.description }}
+                  </p>
+                </div>
+                <img src="{% static 'assets/images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt="" class="shoping_card_img" style="opacity:0;" />
+                <div class="shoping_button">
+                  <a href="/addtocart/{{product.id}}">
+                    <button type="button" class="shoping_card_button" id="first_seafood_button">
+                      Add to Cart
+                    </button>
+                  </a>
+                </div>
               </div>
-              <img src="{% static 'assets/images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt="" class="shoping_card_img" style="opacity:0;" />
-              <div class="shoping_button">
-                <a href="/addtocart/{{product.id}}">
-                  <button type="button" class="shoping_card_button" id="first_seafood_button">
-                    Add to Cart
-                  </button>
-                </a>
-              </div>
-            </div>
+            </a>
           </div>
         </div>
         {% endif %}

@@ -16,6 +16,9 @@ urlpatterns = [
     path('stripe-webhook/', views.stripe_webhook, name='stripe-webhook'),
     path('success', views.success,name='success'),
     path('cancel', views.cancel,name='cancel'),
+    path('detail/<int:id>', views.detail,name='detail'),
+
+
 
 
 ]
