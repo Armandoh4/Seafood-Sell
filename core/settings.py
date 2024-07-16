@@ -11,16 +11,18 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ax*2#@ub7^%rz01-ew@xzwp9l1)+9_=7$icp6)oj3(%9h)$c20'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,7 +46,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -138,12 +139,11 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',  # Bootstrap uses 'danger' class for errors
 }
-STRIPE_SECRET_KEY = 'sk_test_51Pb0sY2NRemYQKSHCGNy5wZoYXRzoaqI1sj7USDAwxx0VnFDBd14GooxFJDtvkGIu8bJkAPLHI9W8jrMrdWmpGFn00rVBWp4op'
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Pb0sY2NRemYQKSHemtVBAjeAzhe4Mpu4N2LV1AOEC6GNc2mn8vsJqbTZHghkr0fePOF82W4Flpstuhwef0N8AWh00lk8sTsYF'
-WEBHOOK_SECRET_KEY = 'whsec_fde6704921f13cb34d5b088455a8720f27bdf44458f5c034902ba3c3139f2de5'
 
-# Configure Django App for Heroku.
-import django_on_heroku
-django_on_heroku.settings(locals())
+# STRIPE_SECRET_KEY = 'sk_test_51Pb0sY2NRemYQKSHCGNy5wZoYXRzoaqI1sj7USDAwxx0VnFDBd14GooxFJDtvkGIu8bJkAPLHI9W8jrMrdWmpGFn00rVBWp4op'
+# STRIPE_PUBLISHABLE_KEY = 'pk_test_51Pb0sY2NRemYQKSHemtVBAjeAzhe4Mpu4N2LV1AOEC6GNc2mn8vsJqbTZHghkr0fePOF82W4Flpstuhwef0N8AWh00lk8sTsYF'
+# WEBHOOK_SECRET_KEY = 'whsec_fde6704921f13cb34d5b088455a8720f27bdf44458f5c034902ba3c3139f2de5'
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+WEBHOOK_SECRET_KEY = os.getenv('WEBHOOK_SECRET_KEY')
 
-STATIC_ROOT = BASE_DIR / "staticfiles"

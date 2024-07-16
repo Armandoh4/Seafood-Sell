@@ -9,15 +9,17 @@ from django.http import JsonResponse, HttpResponse
 import stripe
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-@login_required(login_url='/accounts/login')
 
 def index(request):
     print(request.user)
     categorie = Categorie.objects.all()
     product = Product.objects.all()
-    len_of_cart = Cart.objects.filter(loged_user=request.user).count()
+    len_of_cart = 0
+    if request.user.is_authenticated:
+        len_of_cart = Cart.objects.filter(loged_user=request.user).count()
     cata = request.GET.get('categorie')
 
     if cata:
@@ -139,7 +141,7 @@ def handle_checkout_session(session):
     payment_intent = session.get('payment_intent')
     Record.objects.create(
         customer_email=customer_email,
-        amount_total=amount_total,
+        amount_total=amount_total/100,
         payment_intent=payment_intent
     )
     print(session)
@@ -154,5 +156,7 @@ def cancel(request):
     return render(request,'cancel.html')
 def detail(request,id):
     product = Product.objects.get(pk = id)
-    len_of_cart = Cart.objects.filter(loged_user=request.user).count()
+    len_of_cart = 0
+    if request.user.is_authenticated:
+        len_of_cart = Cart.objects.filter(loged_user=request.user).count()
     return render(request,'details.html',{'product': product, 'len_of_cart': len_of_cart})
