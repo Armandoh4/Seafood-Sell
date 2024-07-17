@@ -41,10 +41,11 @@ class Cart(models.Model):
 #           f'Payment Intent: {payment_intent}')
 
 class Record(models.Model):
-    customer_email= models.CharField(max_length=3000)
-    amount_total= models.CharField(max_length=3000)
-    payment_intent= models.CharField(max_length=3000)
-
+    customer_email= models.CharField(max_length=3000,null=True,blank=True)
+    amount_total= models.CharField(max_length=3000,null=True,blank=True)
+    payment_intent= models.CharField(max_length=3000,null=True,blank=True)
+    payment_id = models.CharField(max_length=3000,null=True,blank=True)
+    status = models.CharField(max_length=3000,null=True,blank=True)
 
     def __str__(self) -> str:
         return self.customer_email

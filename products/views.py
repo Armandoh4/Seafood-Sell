@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render, HttpResponse, redirect
 from .models import *
 from django.conf import settings
 import stripe
@@ -10,11 +10,11 @@ import stripe
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 
+# Set the Stripe secret key from settings
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-
+# Index view to display categories and products
 def index(request):
-    print(request.user)
     categorie = Categorie.objects.all()
     product = Product.objects.all()
     len_of_cart = 0
@@ -23,67 +23,70 @@ def index(request):
     cata = request.GET.get('categorie')
 
     if cata:
-        product = product.filter(Categorie__categorie = cata)
+        product = product.filter(Categorie__categorie=cata)
     context = {
-        "categorie" : categorie,
-        'product':product,
-        'len_of_cart':len_of_cart,
+        "categorie": categorie,
+        'product': product,
+        'len_of_cart': len_of_cart,
     }
-    return render(request,'index.html',context)
+    return render(request, 'index.html', context)
+
+# View to add a product to the cart
 @login_required(login_url='/accounts/login')
-def addtocart(request,id):
-    product = Product.objects.get(id = id)
-    Cart.objects.create(product=product,loged_user=request.user)
+def addtocart(request, id):
+    product = Product.objects.get(id=id)
+    Cart.objects.create(product=product, loged_user=request.user)
     len_of_cart = Cart.objects.filter(loged_user=request.user).count()
     return redirect('home_page')
-# @login_required(login_url='/accounts/login')
+
+# View to display the about us page
 def aboutus(request):
     len_of_cart = 0
     if request.user.is_authenticated:
         len_of_cart = Cart.objects.filter(loged_user=request.user).count()
-    return render(request,'aboutus.html',{'len_of_cart':len_of_cart})
+    return render(request, 'aboutus.html', {'len_of_cart': len_of_cart})
+
+# View to display the cart and its contents
 @login_required(login_url='/accounts/login')
 def cart(request):
     STRIPE_PUBLISHABLE_KEY = settings.STRIPE_PUBLISHABLE_KEY
     if request.user:
-        cart = Cart.objects.filter(loged_user = request.user)
+        cart = Cart.objects.filter(loged_user=request.user)
         len_of_cart = Cart.objects.filter(loged_user=request.user).count()
         total_price = 0
-        for i in cart :
+        for i in cart:
             total_price += i.product.price
         context = {
-            'cart':cart,
-            'total_price':total_price,
-            'len_of_cart':len_of_cart,
-            'stripe_public_key':STRIPE_PUBLISHABLE_KEY
+            'cart': cart,
+            'total_price': total_price,
+            'len_of_cart': len_of_cart,
+            'stripe_public_key': STRIPE_PUBLISHABLE_KEY
         }
-        return render(request,'cart.html',context)
-@login_required(login_url='/accounts/login') 
-def removefromcart(request,id):
+        return render(request, 'cart.html', context)
+
+# View to remove a product from the cart
+@login_required(login_url='/accounts/login')
+def removefromcart(request, id):
     cart = Cart.objects.get(id=id)
     cart.delete()
     return redirect('/cart')
 
-
-
+# View to display the checkout page
 @login_required(login_url='/accounts/login')
 def checkout(request):
     STRIPE_PUBLISHABLE_KEY = settings.STRIPE_PUBLISHABLE_KEY
-    
-    return render(request,'checkout.html',{'stripe_public_key':STRIPE_PUBLISHABLE_KEY})
+    return render(request, 'checkout.html', {'stripe_public_key': STRIPE_PUBLISHABLE_KEY})
 
-
+# View to handle the checkout process
 @login_required(login_url='/accounts/login')
-
-
 @csrf_exempt
 def checkoutpro(request):
     YOUR_DOMAIN = 'http://127.0.0.1:8000'
-
     try:
         cart = Cart.objects.filter(loged_user=request.user)
         total_price = sum(item.product.price for item in cart)
-        
+
+        # Create a Stripe checkout session
         checkout_session = stripe.checkout.Session.create(
             line_items=[
                 {
@@ -98,65 +101,51 @@ def checkoutpro(request):
                 },
             ],
             mode='payment',
-            success_url=YOUR_DOMAIN + '/success',
+            success_url=YOUR_DOMAIN + '/success?session_id={CHECKOUT_SESSION_ID}',
             cancel_url=YOUR_DOMAIN + '/cancel',
         )
-        print('Checkout Session URL:', checkout_session.url)
         return JsonResponse({'id': checkout_session.id})
 
     except Exception as e:
-        print('Error:', e)
         return JsonResponse({'error': str(e)}, status=400)
 
-@csrf_exempt
-def stripe_webhook(request):
-    payload = request.body
-    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', None)
-    event = None
-
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.WEBHOOK_SECRET_KEY
-        )
-    except ValueError as e:
-        # Invalid payload
-        print('Invalid payload:', e)
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        print('Invalid signature:', e)
-        return HttpResponse(status=400)
-
-    # Handle the event
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-        handle_checkout_session(session)
-
-    return JsonResponse({'status': 'success'})
-
-def handle_checkout_session(session):
-    # Retrieve the necessary data from the session object
-    customer_email = session.get('customer_details', {}).get('email')
-    amount_total = session.get('amount_total')
-    payment_intent = session.get('payment_intent')
-    Record.objects.create(
-        customer_email=customer_email,
-        amount_total=amount_total/100,
-        payment_intent=payment_intent
-    )
-    print(session)
+# View to handle successful payments
 def success(request):
-         
-        cart = Cart.objects.filter(loged_user = request.user)
+    session_id = request.GET.get('session_id')
+    if session_id:
+        # Retrieve the session
+        checkout_session = stripe.checkout.Session.retrieve(session_id)
+        line_items = stripe.checkout.Session.list_line_items(session_id)
+        
+        # Record the payment details in the database
+        Record.objects.create(
+            customer_email=checkout_session.customer_details.email,
+            amount_total=checkout_session.amount_total/100,
+            payment_intent=checkout_session.payment_intent,
+            payment_id=checkout_session.id,
+            status=checkout_session.payment_status
+        )
+        
+        # Clear the cart for the logged-in user
+        cart = Cart.objects.filter(loged_user=request.user)
         for item in cart:
             item.delete()
-            print('delete')
-        return render(request,'success.html')
+        return render(request, 'success.html')
+    
+    # Clear the cart even if session_id is not found (fallback)
+    cart = Cart.objects.filter(loged_user=request.user)
+    for item in cart:
+        item.delete()
+    return render(request, 'success.html')
+
+# View to handle cancelled payments
 def cancel(request):
-    return render(request,'cancel.html')
-def detail(request,id):
-    product = Product.objects.get(pk = id)
+    return render(request, 'cancel.html')
+
+# View to display the details of a product
+def detail(request, id):
+    product = Product.objects.get(pk=id)
     len_of_cart = 0
     if request.user.is_authenticated:
         len_of_cart = Cart.objects.filter(loged_user=request.user).count()
-    return render(request,'details.html',{'product': product, 'len_of_cart': len_of_cart})
+    return render(request, 'details.html', {'product': product, 'len_of_cart': len_of_cart})
