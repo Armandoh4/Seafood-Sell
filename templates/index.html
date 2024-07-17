@@ -3,68 +3,95 @@
 {% load static %}
 <!-- Header Start -->
 
-  {% include "components/filter.html" %}
+{% include "components/filter.html" %}
 
 
-  <!-- popup section  -->
-  <div class="container-fluid p-0">
-    <div class="section_two">
-      <h3>All your favourite Seafoods in one place</h3>
-    </div>
+<!-- popup section  -->
+<div class="container-fluid p-0">
+  <div class="section_two">
+    <h3>All your favourite Seafoods in one place</h3>
   </div>
-  <!-- seafoods Products section  -->
-  <div class="container-fluid manage_container">
-    <div class="section_three_ski manage_width">
-      {% comment %} {% for products in product %}
-      1
-        {% for i in products.productimg.all %}
-        <img src='{{i.image.url}}'>
-        {% endfor %}
-        {% endfor %} {% endcomment %}
-      <div class="row">
-        {% for product in product %}
-        {% if product.productimg.all %}
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4">
+</div>
+<!-- seafoods Products section  -->
+<div class="container-fluid manage_container">
+  <div class="section_three_ski manage_width">
+    {% comment %} {% for products in product %}
+    1
+    {% for i in products.productimg.all %}
+    <img src='{{i.image.url}}'>
+    {% endfor %}
+    {% endfor %} {% endcomment %}
+    <div class="row">
+      {% for product in product %}
+      {% if product.productimg.all %}
+      <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4 quiz-card">
 
-          <div class="color_changer_first" style="background-image:url({% with product.productimg.first as first_image %}{{ first_image.image.url }}{% endwith %});">
-            <a href="detail/{{product.id}}">
-              <div class="shoping_card card_content" id="first_Card_hero_section">
-                <div class="details_first px-5 text-white">
-                  <h1>{{ product.product_name }}</h1>
-                  <p id="description-{{ forloop.counter }}">
-                    {{ product.description }}
-                  </p>
-                </div>
-                <img src="{% static 'assets/images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt="" class="shoping_card_img" style="opacity:0;" />
-                <div class="shoping_button">
-                  <a href="/addtocart/{{product.id}}">
-                    <button type="button" class="shoping_card_button" id="first_seafood_button">
-                      Add to Cart
-                    </button>
-                  </a>
-                </div>
+        <div class="color_changer_first"
+          style="background-image:url({% with product.productimg.first as first_image %}{{ first_image.image.url }}{% endwith %});">
+          <a href="detail/{{product.id}}">
+            <div class="shoping_card card_content" id="first_Card_hero_section">
+              <div class="details_first px-5 text-white">
+                <h1 class="name_of_product">{{ product.product_name }}</h1>
+                <p id="description-{{ forloop.counter }}">
+                  {{ product.description }}
+                </p>
               </div>
-            </a>
-          </div>
+              <img src="{% static 'assets/images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt=""
+                class="shoping_card_img" style="opacity:0;" />
+              <div class="shoping_button">
+                <a href="/addtocart/{{product.id}}">
+                  <button type="button" class="shoping_card_button" id="first_seafood_button">
+                    Add to Cart
+                  </button>
+                </a>
+              </div>
+            </div>
+          </a>
         </div>
-        {% endif %}
-      {% endfor %}
-      
-     
-      
-
-
-
-
       </div>
+      {% endif %}
+      {% endfor %}
+
+
+
+
+
+
 
     </div>
 
   </div>
+
+</div>
 
 
 
 <script>
+
+  $('#searchInput').on('input', function () {
+  console.log("hellooooo");
+     var searchText = $(this).val().toLowerCase();
+    $('.quiz-card').each(function () {
+       var titleText = $(this).find('.name_of_product').text().toLowerCase();
+      if (titleText.includes(searchText)) {
+         $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
+  $('#searchInput2').on('input', function () {
+  console.log("hellooooo");
+     var searchText = $(this).val().toLowerCase();
+    $('.quiz-card').each(function () {
+       var titleText = $(this).find('.name_of_product').text().toLowerCase();
+      if (titleText.includes(searchText)) {
+         $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  });
   function truncateDescription(description, maxLength) {
     if (description.length > maxLength) {
       return description.slice(0, maxLength) + '...';
@@ -72,16 +99,16 @@
     return description;
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     {% for product in product %}
-      var descriptionElement = document.getElementById('description-{{ forloop.counter }}');
-      if (descriptionElement) {
-        var truncatedDescription = truncateDescription(descriptionElement.innerText, 389);
-        descriptionElement.innerText = truncatedDescription;
-      }
+    var descriptionElement = document.getElementById('description-{{ forloop.counter }}');
+    if (descriptionElement) {
+      var truncatedDescription = truncateDescription(descriptionElement.innerText, 389);
+      descriptionElement.innerText = truncatedDescription;
+    }
     {% endfor %}
   });
+  
+   
 </script>
-
 {% endblock %}
-
