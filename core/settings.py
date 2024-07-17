@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
+import dj_database_url
+from decouple import config
 from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'products',
-    # 'seafood_app'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -129,8 +132,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_EMAIL_UNIQUE = True
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    # "/var/www/static/",
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
@@ -140,10 +145,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',  # Bootstrap uses 'danger' class for errors
 }
 
-# STRIPE_SECRET_KEY = 'sk_test_51Pb0sY2NRemYQKSHCGNy5wZoYXRzoaqI1sj7USDAwxx0VnFDBd14GooxFJDtvkGIu8bJkAPLHI9W8jrMrdWmpGFn00rVBWp4op'
-# STRIPE_PUBLISHABLE_KEY = 'pk_test_51Pb0sY2NRemYQKSHemtVBAjeAzhe4Mpu4N2LV1AOEC6GNc2mn8vsJqbTZHghkr0fePOF82W4Flpstuhwef0N8AWh00lk8sTsYF'
-# WEBHOOK_SECRET_KEY = 'whsec_fde6704921f13cb34d5b088455a8720f27bdf44458f5c034902ba3c3139f2de5'
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 WEBHOOK_SECRET_KEY = os.getenv('WEBHOOK_SECRET_KEY')
 
+django_heroku.settings(locals())
