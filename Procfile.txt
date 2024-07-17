@@ -1,1 +1,1 @@
-web: gunicorn Seafood-Sell.wsgi:application
+web: gunicorn seafood-sell.wsgi:application
