@@ -119,13 +119,16 @@ The design of this project was simple. I wanted to keep this project focused on 
 ---
 The features are currently split between the edit functions of the Admin & the control over the cart for the regular user interface.
 
+Here is an example of the display of the admin pannel
 ![Here is an example of the display of the admin pannel](readme_assets/admin.png)
 
-![Here is an example of the display of the admin pannel](readme_assets/home.png)
+An example of the display of the admin pannel
+![Here is an example of the display of the homepage](readme_assets/home.png)
 
-![Here is the cart image](readme_assets/cart.png)
+Here is the cart image
+![Cart image](readme_assets/cart.png)
 
-Below I have listed all of the features/functions available in this project:
+#### Below I have listed all of the features/functions available in this project:
     - User authentication and authorization
     - Product browsing by categories
     - Cart functionality

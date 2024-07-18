@@ -15,7 +15,6 @@ def login_view(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            print("______________________________________________________________________________________________________________________________________________")
             login(request, user)
             return redirect("/") 
         else:
@@ -39,9 +38,6 @@ def sign_in(request):
                 user = User.objects.create_user(username=name, email=email, password=password)
                 messages.success(request, 'Your account is successfully created')
                 user.save()
-                print('----------')
-                
-                # login(request, user)
                 return redirect("login")
     
     
