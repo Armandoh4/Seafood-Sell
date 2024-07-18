@@ -32,24 +32,17 @@ The following 'errors' did not affect my code in any meaningful way, and by remo
 
 | Error | Soloution & Result | Pass or Fail |
 | :-------- | :-----|:- |
-|"Element ul not allowed as child of element ul in this context"|I changed the "ul" tag to a "li" tag and the error was resolved in all navigations across all my pages|Pass|
-|"An img element must have an alt attribute, except under certain conditions"|I added "alt" tags to each image element, to resolve this error |Pass|
-|"Element p6 not allowed as child of element section in this context"|To resolve the issues of "p" child elements not being able to be held in "section" I changed the "p6" element to a "div" |Pass|
+
 
 ### *films.html:*
 | Error | Soloution & Result | Pass or Fail |
 | :-------- | :-----|:- |
-|"a tag not nested correctly"|I used a span to wrap the inner contents of the a attribute|Pass|
-|Element summary not allowed as child of element div in this context | I changed the "summary" element to a "section" as it is considered more correct|Pass|
-|Element h1 not allowed as child of element span in this context |I changed the h1 element to a div, as the h1 |Pass|
-|"Error involving 'p' not being allowed as child of element span in this context"| The "p" element cannot be a child of a "span" element. Instead, I swapped the more semantic elements with "span" elements, to reduce the amount of errors. However, as this caused spacing issues, due to span being a block type element, I switched to using divs, similar to the home page film tiles|Pass|
+
 
 ### *about.html:*
 | Error | Soloution & Result | Pass or Fail |
 | :-------- | :-----|:- |
-|"br not allowed as child of element ul"|I removed all "br" tags which spaced out the "li" tags, instead I added a new class to replace this function|Pass|
-|"Element summary not allowed as child of element section"|I changed the semantic element to div|Pass|
-|Issues of open tags, for example, the "main" tag was open, and the same was true for "section" tag| I fixed it by finding where these tags opened, and closing them|Pass|
+
 
 
 ### *bts.html:*
@@ -74,16 +67,14 @@ The following 'errors' did not affect my code in any meaningful way, and by remo
 ### First Time Visitor
 | User Story |Pass or Fail |Soloution & Result |
 | :---- |:-- |:-------|
-|1 - To quickly find out what projects Filmlab is working on|Pass|Finding Filmlab's newest project is easy, it is the first thing that a site visitor will see when they enter the page. When loading the homepage (which is also reached by clicking 'home' or the Filmlab logo), the user will be greeted with a promotional image for said film. This is coupled with a call to action, 'find out more. ' When clicked, the user is transported to a teaser of said film, along with details on the date it will come out (if available), and the cast involved.|
-|2 - To find out if filmlab is a legitimate business along with their track record with film making|Pass|On Filmlab finding out if it is a legitimate producer is simple. A user can navigate to a film via the home page, and clicking a film listed below. Once on the film's page, they can view it, along with the details of the director and producers' social media linked to their name. The official Filmlab social media pages are also linked directly through the navbar, and will open a new window, as to not clear the current one.|
-|3 - To be able to navigate to the films section and watch the projects, possibly after seeing potential advertisements or anticipation on social media for a new film.|Pass|Viewers have many ways to reach a desired film. This can be done on almost all pages, however is most effective on the home page or film page. Here, all films are presented with a thumbnail, genera, film length, release date & a description of the film's contents. This gives the user a complete overview of the page and its content.|
-|4 - To find out information on the team behind filmlab, follow the careers of actors involved, where the company is based, and to contact the company directly.|Pass|An investor would be most interested in the involvement of the producers in each project, along with their corresponding roles. This is easily accessible underneath the description of the film, where it describes who was involved and their social media address'. However, while investors will have an inherent interest in contacting the company directly. To navigate to this section, there is one method. To go to the navigation bar, on the left and it opens the email. However, this may not be the best experience as it takes the user off the page. This is easily accomplished through the "Contact us" hyperlink. However, as this takes the user to another app, this can be seen as less desirable for the user.|
-|5 - What the company is about and how they work together to produce films|Pass|This user would be interested in the 'behind the scenes' aspects of Filmlab. As such they will likely use the navigation bar on the left side, and press 'BTS' or its corresponding icon. This will bring them to a slideshow with all the photos of the team together, and an interactive button to change the slides. There is also a video below the 'BTS' image slideshow.|
+|1 - To quickly find out what products Ssell is offering|Pass|Finding Ssell's newest products are easy, it is the first thing that a site visitor will see when they enter the page. When loading the homepage (which is also reached by clicking 'Seafood-Sell'), the user will be greeted with a array of products with the corrisponding image for said product.|
+|2 - To find out if Ssell is a legitimate business, does this webapp legitimise the company?|Pass|On Ssell finding out if it is a legitimate supplier is simple. A user can navigate through the products listed in the home page, or contact the company via the email listed below. The only thing that I could do in the future to improve this would be to allow reviews on the website itself, providing greater authenticity.|
+|3 - To find out information on the team behind Ssell, follow the latest news about the company, where the company is based, and to contact the company directly.|Pass|On this site, the user is able to stay up to date with the about us page. However, this is still lacking some features and needs to be improved to provide more information.|
+|4 - What the company is about and where they source their items.|Pass|Activists and nutritunalists usually like to know where their food came from and if they meet rigorous tests and procedures before arriving to the customer. This is easily accessible underneath the description of the product, where it describes everything about the product in detail. However, the information listed is limited due to my own time constraints with writing descriptions on each item.|
 
 ### Returning Visitor GOAL
 | User Story |Pass or Fail |Soloution & Result |
 | :---- |:-- |:-------|
-|1 - To navigate around and see the newest projects & films, or upcoming projects|Pass|Similar to the first time user, to stay up to date on the newest projects. The user only needs to go as far as the home page, as all promotional contents are displayed there.|
-|2 - To be able to see up to new images on the behind the scenes page, with new content about upcoming or completed projects, that they care about|Pass|Filmlab achieves this well, returning visitors will be able to stay up to date with the Behind The Scenes (BTS) page, which can be found by clicking on 'BTS' in the navigation panel. Additionally, the home page photo is always up to date with the newest film, so it is easy to stay up to date with current projects.|
-|3 - Actors or producers who want to share their work|Pass|All people involved in each film are mentioned in the credits under each film. To reach this, a user will only need to go as far as to click on the a film to open the corresponding page. They can then share their direct involvement in a project, or their role in the Filmlab team, in the 'about' page, which is found via the navigation menu.|
-|4 - Creators would be more interested in publishing their work, rather than watching. These users would demand an admin account where they can upload, edit and delete videos from the database.| PASS|Admins are now able to log in with the admin login and password. This brngs them to a new interface that allows them to edit 'Films.' However, these do not transfer over to other pages yet.|
+|1 - One user might be an admin or owner of the website. This user would require a way to list and describe new items, along with the ability to edit existing ones.|Pass|The Admin user can create new items, add or remove an image and change the description/ catagory of the item.|
+|2 - Look for discounts or sales at that time|Fail|While prices are listed on the site, the items do not show a before and after, making it challanging for users to compare yesterdays price to the price of today. For this reason, it does not pass this test for me.|
+|3 - Be able to contact the business regarding business enquiries|Pass|Investors will have an inherent interest in contacting the company directly. To navigate to this section, there is one method. To go to the navigation bar, on 'contact us' and it opens the email app. However, this may not be the best experience as it takes the user off the page. This is easily accomplished through the "Contact us" hyperlink. However, as this takes the user to another app, this can be seen as less desirable for the user.|
