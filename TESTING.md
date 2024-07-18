@@ -1,6 +1,6 @@
 # Testing - Filmlab Productions
 
-![Home](assets/readme_img/home.png)
+![Home](readme_assets/home.png)
 
 ---
 ## Contents:
@@ -9,58 +9,24 @@
   * [Testing User Stories](#testing-user-stories)
 ---
 
-
 ## Jigsaw CSS Validation
-    
-| Bug (class)   | Error  | Soloution & Result |
-| :------------ |:---------------| :-----|
-|.oneByOne|"Too many values or values are not recognized : 20px 1em"| By removing the additional "1em" nothing visible on the page changed |
-|.inLine .mainTitle|"Value Error : text-align centre is not a text-align value : centre"|I fixed the typo of "center", however this still does not impact the webpage visually|
-|.pcLogo |centre is not a align-items value : centre| This was tghe same issue as above, but once it was resolved, the effect was noticable, as the pc logo now sat in the middle of the nav-bar, as it was intended to|
-|.navbar-nav|in is not a transition value : transform 0.4s ease in |I removed this because the code was meant to create a transition between the navbar sidepannel appearing and diappearing, however, it did not function in this way |
 
-![Jigsaw CSS](assets/readme_img/jigsawcssvalidator1.png)
+![Jigsaw CSS](readme_assets/css.png)
 
-The following 'errors' did not affect my code in any meaningful way, and by removing this code, my website would loose features. For example, code such as "-webkit-tap-highlight-color: transparent;" can have a positive effect on the webpage, such as removing the blue box when a button on a mobile is clicked, improving mobile UX.
-
-![Jigsaw CSS](assets/readme_img/jigsawcssvalidator.png)
+The css passed every validator flawlessly, only having issues with understanding the code pretaining to Bootstrap.
 
 
 ## W3C HTML Validation
 
-### *index.html:*
+![W3C HTML](/readme_assets/w3.png)
+I have fixed most errors not related to Django. However, I would require more understanding of the procedures relating to the validation of such code. This is certainly my own limitation and I will work on this skill going forward.
 
-| Error | Soloution & Result | Pass or Fail |
-| :-------- | :-----|:- |
-
-
-### *films.html:*
-| Error | Soloution & Result | Pass or Fail |
-| :-------- | :-----|:- |
-
-
-### *about.html:*
-| Error | Soloution & Result | Pass or Fail |
-| :-------- | :-----|:- |
-
-
-
-### *bts.html:*
-| Error | Soloution & Result | Pass or Fail |
-| :-------- | :-----|:- |
-| Attribute src not allowed on element button|Since src is not the correct element to apply to a button I applied the img tag instead |Pass|
-
-### *Films section | Kidnapped |Killer Santa | Once Upon a Time:*
-| Error | Soloution & Result | Pass or Fail |
-| :-------- | :-----|:- |
-|"Attribute src not allowed on element button"|Since src is not the correct element to apply to a button I applied the img tag instead |Pass|
-|"The frameborder attribute on the iframe element is obsolete"|Since the value of the item was 0, it was unnecesarry to include any further|Pass|
-|"Error from using 'p5' as a child element for a 'ul'"|To counteract this I changed the child to "li" and targeted the new list items with the following properties "list-style: none; display: inline;" so they behave as they did before|Pass|
-|"Error: No li element in scope but a li end tag seen"|Deleted surplus "li" tag|Pass|
-
-## PEP8 - app.py
+## PEP8 - manage.py
 
   In my code there were no major errors. Only referingto white spaces and and lines being too long. In this regard the code fails these tests. However the end user will not experience any errors due to them.
+
+  ExtendClass Python Syntax Checker:
+![Jigsaw CSS](readme_assets/python.png)
 
 ## Testing User Stories:
 
