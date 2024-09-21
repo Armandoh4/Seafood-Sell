@@ -3,17 +3,14 @@
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
-from dotenv import load_dotenv
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-load_dotenv()
+SECRET_KEY = 'django-insecure-ax*2#@ub7^%rz01-ew@xzwp9l1)+9_=7$icp6)oj3(%9h)$c20'
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -29,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'products',
+    'cart'
 ]
 
 MIDDLEWARE = [
@@ -101,19 +99,18 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-
-STATIC_URL = 'static/'
-STATICFILES_DIR = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(STATIC_ROOT,'assets')]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_EMAIL_UNIQUE = True
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Bootstrap Messages 
 MESSAGE_TAGS = {
@@ -123,11 +120,9 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',  
 }
-
-# stripe 
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
-STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
-WEBHOOK_SECRET_KEY = os.getenv('WEBHOOK_SECRET_KEY')
+STRIPE_SECRET_KEY = 'sk_test_51Pb0sY2NRemYQKSHCGNy5wZoYXRzoaqI1sj7USDAwxx0VnFDBd14GooxFJDtvkGIu8bJkAPLHI9W8jrMrdWmpGFn00rVBWp4op'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Pb0sY2NRemYQKSHemtVBAjeAzhe4Mpu4N2LV1AOEC6GNc2mn8vsJqbTZHghkr0fePOF82W4Flpstuhwef0N8AWh00lk8sTsYF'
+WEBHOOK_SECRET_KEY = 'whsec_fde6704921f13cb34d5b088455a8720f27bdf44458f5c034902ba3c3139f2de5'
 
 
 

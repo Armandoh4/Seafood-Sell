@@ -30,7 +30,7 @@
             ${{product.price}}
            </h2>
            <div class="text-center mt-3">
-            <a href="/addtocart/{{product.id}}">
+            <a href="{% url 'addtocart' product.id %}">Add to Cart</a>
            <button class="cart_btn_detail" style="" >Add to Cart</button>
             </a>
            </div>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import *
+from cart.models import *
 from django.conf import settings
 import stripe
 from django.urls import reverse
@@ -17,6 +18,12 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def index(request):
     categorie = Categorie.objects.all()
     product = Product.objects.all()
+    scheme = request.scheme
+    # Get the current host (domain)
+    host = request.get_host()
+    # Construct the full URL
+    full_url = f"{scheme}://{host}/"
+    print(full_url)
     len_of_cart = 0
     if request.user.is_authenticated:
         len_of_cart = Cart.objects.filter(loged_user=request.user).count()
@@ -81,7 +88,11 @@ def checkout(request):
 @login_required(login_url='/accounts/login')
 @csrf_exempt
 def checkoutpro(request):
-    YOUR_DOMAIN = 'http://127.0.0.1:8000'
+    scheme = request.scheme
+    # Get the current host (domain)
+    host = request.get_host()
+    # Construct the full URL
+    YOUR_DOMAIN = f"{scheme}://{host}/"
     try:
         cart = Cart.objects.filter(loged_user=request.user)
         total_price = sum(item.product.price for item in cart)
