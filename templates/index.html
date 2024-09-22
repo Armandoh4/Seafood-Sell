@@ -32,7 +32,7 @@
             <div class="shoping_card card_content" id="first_Card_hero_section">
               <div class="details_first px-5 text-white w-100">
                 <h1 class="name_of_product">{{ product.product_name }}</h1>
-                <p id="description-{{ forloop.counter }}" style='word-wrap: break-word;'>
+                <p id="description-{{ forloop.counter }}" style="word-wrap: break-word;">
                   {{ product.description }}
                 </p>
               </div>
@@ -51,23 +51,13 @@
       </div>
       {% endif %}
       {% endfor %}
-
-
-
-
-
-
-
     </div>
-
   </div>
-
 </div>
 
 
 
 <script>
-
   $('#searchInput').on('input', function () {
      var searchText = $(this).val().toLowerCase();
     $('.quiz-card').each(function () {
