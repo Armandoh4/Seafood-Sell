@@ -11,7 +11,9 @@
             <div class="swiper mySwiper" >
                 <div class="swiper-wrapper">
                     {% for i in product.productimg.all %}
-                  <div class="swiper-slide" style="border: 2px solid white;  border-radius: 20px;overflow:hidden;"> <img src="{{ i.image.url }}" class="d-block" alt="{{ product.product_name }}"></div>
+                  <div class="swiper-slide" style="border: 2px solid white;  border-radius: 20px;overflow:hidden;">
+                    <img src="{{ i.image.url }}" class="d-block" alt="{{ product.product_name }}">
+                  </div>
                   {% endfor %}
                 </div>
                 <div class="swiper-button-next"></div>

@@ -78,6 +78,10 @@ def removefromcart(request, id):
     cart.delete()
     return redirect('/cart')
 
+# View to quantify products in cart
+
+
+
 # View to display the checkout page
 @login_required(login_url='/accounts/login')
 def checkout(request):
