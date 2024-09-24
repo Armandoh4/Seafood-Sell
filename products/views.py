@@ -57,12 +57,25 @@ def aboutus(request):
 @login_required(login_url='/accounts/login')
 def cart(request):
     STRIPE_PUBLISHABLE_KEY = settings.STRIPE_PUBLISHABLE_KEY
+
+    if request.method == "POST":
+        product_id = request.POST.get('product_id')
+        
+        quantity = int(request.POST.get('quantity', 0))
+
+        if product_id and quantity > 0:
+            product = Product.objects.get(id=product_id)
+            for _ in range(quantity):
+                Cart.objects.create(product=product)
+
+            return redirect('cart')
     if request.user:
         cart = Cart.objects.filter(loged_user=request.user)
         len_of_cart = Cart.objects.filter(loged_user=request.user).count()
         total_price = 0
         for i in cart:
             total_price += i.product.price
+
         context = {
             'cart': cart,
             'total_price': total_price,

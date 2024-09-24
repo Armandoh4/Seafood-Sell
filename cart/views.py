@@ -32,15 +32,13 @@ def cart(request):
             total_price += i.product.price
         context = {
             'cart': cart,
+            'test': 'test',
             'total_price': total_price,
             'len_of_cart': len_of_cart,
             'stripe_public_key': STRIPE_PUBLISHABLE_KEY
         }
         return render(request, 'cart.html', context)
 
-# def item_quantity(request):
-#     for i in item_quantity:
-        
 def get_qty_cart(request):
     if request.method == 'POST':
         console.log('Quantity test 1')
@@ -53,8 +51,7 @@ def get_qty_cart(request):
          
         return HttpResponse(f"Received qty-cart value: {qty_cart_value}")
     else:
-        return render(request, 'your_templa te.html')
-
+        return render(request, 'your_template.html')
 
 # View to remove a product from the cart
 @login_required(login_url='/accounts/login')

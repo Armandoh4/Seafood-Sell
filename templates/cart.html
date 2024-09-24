@@ -35,7 +35,9 @@
                 </td>
                 <td>
                     <div>
-                        <select class="form-select" id="qty-cart">
+                        <form method="POST">
+                        {% csrf_token %}
+                        <select class="form-select" id="{{cart.product.id}}qty-cart" name="quantity">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -47,6 +49,9 @@
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
+                        <input type="hidden" name="product_id" value="{{cart.product.id}}">
+                        <button type="submit">Update</button>
+                        </form>
                     </div>
                 </td> <!--Table last item-->
             </tr>
@@ -81,7 +86,7 @@
                     <h4 class=" ">Total Amount</h4>
                 </div>
                 <div class="col-6">
-                    <h5 class=" ">${{total_price}}</h5>
+                    <h5 class=" " id="total_price">${{total_price}}</h5>
                 </div>
 
                 <div style="display: flex; justify-content: center;">
@@ -104,5 +109,6 @@
         <h1 class="text-black text-center">Your Cart is Empty</h1> 
     {% endif %}
 </div>
+
 
 {% endblock %}
