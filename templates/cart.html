@@ -29,15 +29,30 @@
                 </td>
                 <td>{{cart.product.price}}</td>
                 <td class="text-center">
-                    <a style="text-decoration:none;" href="{% url "remove" cart.id %}">
+                    <a style="text-decoration:none;" href="{% url 'remove' cart.id %}">
                     <button type="button" class="btn btn-danger">Remove</button>
                     </a>
                 </td>
-                <td>{{cart.product.price}}</td> <!--Table last item-->
-
+                <td>
+                    <div>
+                        <select class="form-select" id="qty-cart">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </td> <!--Table last item-->
             </tr>
             {% endfor %}
 
+            
             {% comment %} <tr>
                 <th scope="row">2</th>
                 <td><img src="https://cdn.shopify.com/s/files/1/0657/8569/2375/files/Cosmetic-Skincare-Product-photo-Table-top-setup.jpg?v=1681840139"
@@ -89,6 +104,5 @@
         <h1 class="text-black text-center">Your Cart is Empty</h1> 
     {% endif %}
 </div>
-
 
 {% endblock %}

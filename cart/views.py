@@ -38,6 +38,24 @@ def cart(request):
         }
         return render(request, 'cart.html', context)
 
+# def item_quantity(request):
+#     for i in item_quantity:
+        
+def get_qty_cart(request):
+    if request.method == 'POST':
+        console.log('Quantity test 1')
+        # Request the integer value of the id element of "qty-cart"
+        qty_cart_value = int(request.POST.get('qty-cart', 1))
+        
+        # Create a console for loop that prints the integer value of "qty-cart" element
+        for i in range(qty_cart_value):
+            print(f"qty-cart value is: {qty_cart_value}")
+         
+        return HttpResponse(f"Received qty-cart value: {qty_cart_value}")
+    else:
+        return render(request, 'your_templa te.html')
+
+
 # View to remove a product from the cart
 @login_required(login_url='/accounts/login')
 def removefromcart(request, id):

@@ -8,9 +8,7 @@ class Cart(models.Model):
 
     def __str__(self) -> str:
         return self.product.product_name
-# f'Customer Email: {customer_email}',
-#           f'Amount: {amount_total}',
-#           f'Payment Intent: {payment_intent}')
+
 
 class Record(models.Model):
     customer_email= models.CharField(max_length=3000,null=True,blank=True)
