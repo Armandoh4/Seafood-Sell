@@ -8,9 +8,9 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = 'django-insecure-ax*2#@ub7^%rz01-ew@xzwp9l1)+9_=7$icp6)oj3(%9h)$c20'
+# SECRET_KEY = '' set your own secret key
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
