@@ -65,8 +65,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': BASE_DIR / 'wand_sneak_arise_36178',
+        'USER': 'uvkr0npe3xu',
+        'PASSWORD': 'aDrUNrLZ8x0q',
+        'HOST': 'ep-gentle-mountain-a23bxz6h-pooler.eu-central-1.aws.neon.tech',
+        'PORT': 'postgres://uvkr0npe3xu:aDrUNrLZ8x0q@ep-gentle-mountain-a23bxz6h-pooler.eu-central-1.aws.neon.tech/wand_sneak_arise_36178',
     }
 }
 
