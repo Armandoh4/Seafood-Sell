@@ -9,6 +9,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
+
+
+STRIPE_SECRET_KEY = os.environ.get("STRIPE")
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
+WEBHOOK_SECRET_KEY = os.environ.get("WEBHOOK_SECRET_KEY")
+
+
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
