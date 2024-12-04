@@ -5,9 +5,8 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
+load_dotenv('./env.py')
 
-# API_KEY = os.environ.get("API_KEY")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
