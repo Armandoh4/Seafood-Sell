@@ -1,19 +1,18 @@
-
-
-from pathlib import Path
 import os
+from pathlib import Path
 from django.contrib.messages import constants as messages
-
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# API_KEY = os.environ.get("API_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-
-STRIPE_SECRET_KEY = os.environ.get("STRIPE")
-STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
-WEBHOOK_SECRET_KEY = os.environ.get("WEBHOOK_SECRET_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
+WEBHOOK_SECRET_KEY = os.getenv("WEBHOOK_SECRET_KEY")
 
 
 DEBUG = False
