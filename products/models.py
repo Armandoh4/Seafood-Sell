@@ -4,13 +4,13 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Categorie(models.Model):
-    categorie=models.CharField(max_length=1300,null=True)
+    categorie=models.CharField(max_length=30,null=True)
     def __str__(self) -> str:
         return self.categorie
 
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=3000)
+    product_name = models.CharField(max_length=30)
     price = models.IntegerField()
     description=models.TextField()
     Categorie=models.ForeignKey(Categorie,on_delete=models.CASCADE,default=1,null=True)
