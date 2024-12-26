@@ -5,9 +5,9 @@ from products.models import *
 class Cart(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE,default=1,null=True,related_name="products")
     loged_user=models.ForeignKey(User,on_delete=models.CASCADE,default=1,null=True,related_name="User")
-
+    quantity = models.PositiveIntegerField(default=1)
     def __str__(self) -> str:
-        return self.product.product_name
+        return f'{self.product.product_name} (x{self.quantity})'
 
 
 class Record(models.Model):
