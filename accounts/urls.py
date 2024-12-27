@@ -7,16 +7,11 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    
     path('login', views.login_view,name='login'),
     path('signup', views.signup,name='signup'),
     path('sign_in', views.sign_in,name='sign_in'),
     path('logout', views.logout_view,name='logout'),
     path('login_view', views.login_view,name='login_view'),
-
-
-
-
 ]
 
 if settings.DEBUG:
