@@ -1,102 +1,66 @@
 {% extends "base.html" %}
 {% block body %}
 {% load static %}
-<!-- Header Start -->
 
+<!-- Filter Section -->
 {% include "components/filter.html" %}
 
-
-<!-- popup section  -->
-<div class="container-fluid p-0">
-  <div class="section_two">
-    <h3>All your favourite Seafoods in one place</h3>
-  </div>
-</div>
-<!-- seafoods Products section  -->
+<!-- Seafoods Products Section -->
 <div class="container-fluid manage_container">
   <div class="section_three_ski manage_width">
-    {% comment %} {% for products in product %}
-    1
-    {% for i in products.productimg.all %}
-    <img src='{{i.image.url}}'>
-    {% endfor %}
-    {% endfor %} {% endcomment %}
     <div class="row">
-      {% for product in product %}
-      {% if product.productimg.all %}
-      <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4 quiz-card">
-
-        <div class="color_changer_first"
-          style="background-image:url({% with product.productimg.first as first_image %}{{ first_image.image.url }}{% endwith %});">
-          <a href="detail/{{product.id}}">
-            <div class="shoping_card card_content" id="first_Card_hero_section">
-              <div class="details_first px-5 text-white w-100">
-                <h1 class="name_of_product">{{ product.product_name }}</h1>
-                <p id="description-{{ forloop.counter }}" style="word-wrap: break-word;">
-                  {{ product.description }}
-                </p>
+      {% for product in products %}
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12 mt-4 quiz-card">
+          <!-- Dynamic Background Image -->
+          <div class="color_changer_first" 
+               style="background-image:url({% if product.productimg.first.image %}{{ product.productimg.first.image.url }}{% else %}{% static 'images/default-product.jpg' %}{% endif %});">
+            <a href="{% url 'detail' product.id %}">
+              <div class="shoping_card card_content">
+                <div class="details_first px-5 text-white w-100">
+                  
+                  <p style="color: black;" id="description-{{ forloop.counter }}" style="word-wrap: break-word;">
+                    {{ product.description|truncatechars:100 }}
+                  </p>
+                </div>
+                <img src="{% static 'images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt=""
+                     class="shoping_card_img" style="opacity:0;" />
+                <div class="shoping_button">
+                  <a href="{% url 'addtocart' product.id %}">
+                    <button type="button" class="shoping_card_button">
+                      Add to Cart
+                    </button>
+                  </a>
+                </div>
               </div>
-              <img src="{% static 'images/seafood-shrimp-oysters-732x549-thumbnail.avif' %}" alt=""
-                class="shoping_card_img" style="opacity:0;" />
-              <div class="shoping_button">
-                <a href="{% url "addtocart" product.id %}">
-                  <button type="button" class="shoping_card_button" id="first_seafood_button">
-                    Add to Cart
-                  </button>
-                </a>
-              </div>
-            </div>
-          </a>
+            </a>
+            
+          </div>
+          <h1 style="color: aliceblue;" class="name_of_product">{{ product.product_name }}</h1>
+          <h3 style="color: aliceblue;"><strong style="color: rgb(157, 197, 235);">Price:</strong > ${{ product.price }}</h3>
         </div>
-      </div>
-      {% endif %}
+      {% empty %}
+        <div class="col-12 text-center mt-5">
+          <h3>No products available in this category.</h3>
+        </div>
       {% endfor %}
     </div>
   </div>
 </div>
 
-
-
 <script>
-  $('#searchInput').on('input', function () {
-     var searchText = $(this).val().toLowerCase();
-    $('.quiz-card').each(function () {
-       var titleText = $(this).find('.name_of_product').text().toLowerCase();
-      if (titleText.includes(searchText)) {
-         $(this).show();
-      } else {
-        $(this).hide();
-      }
-    });
-  });
-  $('#searchInput2').on('input', function () {
-     var searchText = $(this).val().toLowerCase();
-    $('.quiz-card').each(function () {
-       var titleText = $(this).find('.name_of_product').text().toLowerCase();
-      if (titleText.includes(searchText)) {
-         $(this).show();
-      } else {
-        $(this).hide();
-      }
-    });
-  });
-  function truncateDescription(description, maxLength) {
-    if (description.length > maxLength) {
-      return description.slice(0, maxLength) + '...';
-    }
-    return description;
-  }
-
+  // Product search functionality
   document.addEventListener('DOMContentLoaded', function () {
-    {% for product in product %}
-    var descriptionElement = document.getElementById('description-{{ forloop.counter }}');
-    if (descriptionElement) {
-      var truncatedDescription = truncateDescription(descriptionElement.innerText, 389);
-      descriptionElement.innerText = truncatedDescription;
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', function () {
+        const searchText = this.value.toLowerCase();
+        document.querySelectorAll('.quiz-card').forEach(card => {
+          const titleText = card.querySelector('.name_of_product').innerText.toLowerCase();
+          card.style.display = titleText.includes(searchText) ? '' : 'none';
+        });
+      });
     }
-    {% endfor %}
   });
-  
-   
 </script>
+
 {% endblock %}
